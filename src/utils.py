@@ -5,10 +5,6 @@ import random
 import matplotlib.pyplot as plt
 
 
-def similiarity_diff(event_vec, node_vec):
-    return np.linalg.norm(event_vec - node_vec)
-
-
 # from INA tutorial
 def info(G, fast=False):
     def avg_shortest_path(G):
