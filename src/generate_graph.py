@@ -10,6 +10,7 @@ from utils import info, visualize, deg_distribution_plot
 from node_generation_utils import generate_graph_from_personality_data
 
 
+# TODO decide distribution of distances
 def generate_distance():
     mean = 0
     sigma = 0.1
@@ -65,7 +66,7 @@ def generate_graph(num_nodes, min_deg):
         if len(percentual_dist_list_y) == lower_bound_index: lower_bound_index -= 1
         return percentual_dist_list_y[lower_bound_index][0]
         
-    # TODO
+    # TODO precompute neighs (what should be the size? maybe square of min_deg?)
     def neighs(node):
         return nodes
 
@@ -93,7 +94,9 @@ def generate_graph(num_nodes, min_deg):
             sampled_nodes.append(neigbours[idx])
         return sampled_nodes
 
+    # MAIN
     for node in shuffled_nodes:
+        # TODO flip a coin and either travel y or x
         destination_node = travel_y(node) 
         sampled_nodes = sample_nodes_from_destination(node, destination_node, min_deg)
         for sampled_node in sampled_nodes:

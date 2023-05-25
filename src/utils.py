@@ -96,8 +96,9 @@ def visualize(G):
     plt.show()
 
 
+# TODO maybe buggy
 def deg_distribution_plot(G):
     plt.xlabel("Degree")                                                            
     plt.ylabel("Frequency")                                                         
     plt.loglog(nx.degree_histogram(G), marker=".", linestyle="None")
-    plt.show()   
+    plt.show()
