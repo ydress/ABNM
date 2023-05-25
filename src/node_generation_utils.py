@@ -6,12 +6,29 @@ import numpy as np
 import pycristoforo as pyc
 
 
-# TODO maybe normalize this -> simplify code in other parts
 def generate_locations_in_europe(n):
     country_name = "Italy"
     country = pyc.get_shape(country_name)
     points = pyc.geoloc_generation(country, n, country_name)
-    return [point['geometry']['coordinates'] for point in points]
+    coors = [point['geometry']['coordinates'] for point in points]
+    def normalize_coordinates(x, y, min_x, max_x, min_y, max_y):
+        normalized_x = (x - min_x) / (max_x - min_x)
+        normalized_y = (y - min_y) / (max_y - min_y)
+        return normalized_x, normalized_y
+    max_x = coors[0][0]
+    min_x = max_x
+    max_y = coors[0][1]
+    min_y = max_y
+    for x, y in coors:
+        max_x = max( max_x, x )
+        min_x = min( min_x, x )
+        max_y = max( max_y, y )
+        min_y = min( min_y, y )
+    normalized_coors = []
+    for x, y in coors:
+        coor = normalize_coordinates(x, y , min_x, max_x, min_y, max_y)
+        normalized_coors.append(coor)
+    return normalized_coors
 
 
 # https://www.kaggle.com/datasets/arslanali4343/top-personality-dataset

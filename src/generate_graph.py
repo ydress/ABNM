@@ -21,39 +21,19 @@ def generate_distance():
     return samples[0]
 
 
-def precompute_y(G):
-    sorted_nodes = sorted(G.nodes(data=True), key=lambda x: x[1]['coor'][1])
-    max_y = sorted_nodes[0][1]['coor'][1]
-    min_y = max_y
-    for node in sorted_nodes:
-        y = node[1]['coor'][1]
-        max_y = max ( max_y , y )
-        min_y = min ( min_y , y )
-    total_y_len = max_y - min_y 
-    # map every node to percentual distance from begining to end
-    # [ (node_id, perc_dist) ]
-    percentual_dist_list = []
-    # [ {node_id: index in perc_dist_list} ]
-    percentual_dist_dict = dict()
-    for node in sorted_nodes:
+# x == 0 , y == 1 -> sorted tuples by axis (node_id, (x,y)), dict(node_id : idx)
+def precompute_axis(G, axis):
+    sorted_nodes = sorted(G.nodes(data=True), key=lambda x: x[1]['coor'][axis])
+    sorted_nodes = [ (node_id, data['coor'][axis]) for node_id, data in sorted_nodes]
+    sorted_nodes_idxs = dict()
+    for idx, node in enumerate(sorted_nodes):
         node_id = node[0]
-        y = node[1]['coor'][1]
-        percentual_dist = ( y - min_y ) / total_y_len
-        percentual_dist_list.append( (node_id, percentual_dist) )
-        percentual_dist_dict[node_id] = len(percentual_dist_list) - 1
-    return percentual_dist_list, percentual_dist_dict
+        sorted_nodes_idxs[node_id] = idx
+    return sorted_nodes, sorted_nodes_idxs
 
 
 def generate_graph(num_nodes, min_deg):
     G, similarity_function = generate_graph_from_personality_data(num_nodes=num_nodes)
-    #def precompute_node_neighs_dict():
-    #    coors_list = []
-    #    for node in G.nodes(data=True):
-    #        (x,y) = (node[1]['coor'])
-    #        coors_list.append((x,y))
-    #    return closestPairs(coors_list, len(G))
-    #TODO node id should be key for dict
-    #node_neighs_dict = precompute_node_neighs_dict()
 
     node_neighs_dict = dict()
     nearest = min_deg**2
@@ -68,21 +48,28 @@ def generate_graph(num_nodes, min_deg):
     shuffled_nodes = copy.copy(nodes)
     random.shuffle(shuffled_nodes)
 
-    percentual_dist_list_y, percentual_dist_dict_y = precompute_y(G)
-    percents_y = [y for node_id, y in percentual_dist_list_y]
+    sorted_nodes_x, sorted_nodes_idxs_x = precompute_axis(G, 0)
+    sorted_nodes_y, sorted_nodes_idxs_y = precompute_axis(G, 1)
 
     # travel from node on y axis -> destination node
-    def travel_y(node):
-        idx_in_list = percentual_dist_dict_y[node]
-        _, perc = percentual_dist_list_y[idx_in_list]
+    def travel_axis(node, axis):
+        if axis == 0:
+            percents = [perc for node_id, perc in sorted_nodes_x]
+            idx_in_list = sorted_nodes_idxs_x[node]
+            _, perc = sorted_nodes_x[idx_in_list]
+        else:
+            percents = [perc for node_id, perc in sorted_nodes_y]
+            idx_in_list = sorted_nodes_idxs_y[node]
+            _, perc = sorted_nodes_y[idx_in_list]
         dist = generate_distance()
         target_perc = perc + dist
         if dist >= 0:
-            lower_bound_index = bisect.bisect_left(percents_y, target_perc)
+            lower_bound_index = bisect.bisect_left(percents, target_perc)
         if dist < 0:
-            lower_bound_index = bisect.bisect_right(percents_y, target_perc)
-        if len(percentual_dist_list_y) == lower_bound_index: lower_bound_index -= 1
-        return percentual_dist_list_y[lower_bound_index][0]
+            lower_bound_index = bisect.bisect_right(percents, target_perc)
+        if len(sorted_nodes_x) == lower_bound_index: lower_bound_index -= 1
+        if axis == 0: return sorted_nodes_x[lower_bound_index][0]
+        else: return sorted_nodes_y[lower_bound_index][0]
         
     # TODO precompute neighs (what should be the size? maybe square of min_deg?)
     def neighs(node):
@@ -113,8 +100,8 @@ def generate_graph(num_nodes, min_deg):
 
     # MAIN
     for node in shuffled_nodes:
-        # TODO flip a coin and either travel y or x
-        destination_node = travel_y(node) 
+        axis = random.choice([0, 1])
+        destination_node = travel_axis(node, axis)
         sampled_nodes = sample_nodes_from_destination(node, destination_node, min_deg)
         for sampled_node in sampled_nodes:
             G.add_edge(node, sampled_node)
