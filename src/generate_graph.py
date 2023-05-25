@@ -80,7 +80,10 @@ def generate_graph(num_nodes, min_deg):
                 deg_const = 1
                 sim = similarity_function(G.nodes[traveler_node]['vector'], G.nodes[node]['vector'])
                 #TODO: preferencial
-                P_deg = G.degree[node] / sum_degs
+                if not sum_degs:
+                    P_deg = 0
+                else:
+                    P_deg = G.degree[node] / sum_degs
                 P_attach = sim_const * sim + deg_const * P_deg
                 P_attach_list.append(P_attach)
         weights = P_attach_list
