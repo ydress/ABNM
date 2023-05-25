@@ -154,6 +154,5 @@ if __name__ == "__main__":
     #G = generate_graph(num_nodes=100, min_deg=2)
     G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
     info(G)
-    if ARGS.visualize:
-        visualize(G)
+    visualize(G)
     deg_distribution_plot(G)
