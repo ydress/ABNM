@@ -55,9 +55,9 @@ def generate_graph(num_nodes, min_deg):
     #node_neighs_dict = precompute_node_neighs_dict()
 
     node_neighs_dict = dict()
-
+    nearest = min_deg**2
     for node in G.nodes(data=True):
-        neighs_list = k_closest_points(G=G, target=node[1]['coor'], k=5)
+        neighs_list = k_closest_points(G=G, target=node[1]['coor'], k=nearest)
         node_id = node[0]
         node_neighs_dict[node_id] = neighs_list
 
