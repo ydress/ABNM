@@ -41,7 +41,7 @@ def info(G, fast=False):
     print()
     return G
 
-def closestPair(coordinates, n):
+def closestPairs(coordinates, n):
 
     # List of pairs to store points on plane
     points = [(coordinates[i][0], coordinates[i][1]) for i in range(n)]
@@ -98,7 +98,6 @@ def visualize(G):
     plt.show()
 
 
-# TODO maybe buggy
 def deg_distribution_plot(G):
     # Compute the degree distribution p_k
     degrees = [k for n, k in G.degree()]
