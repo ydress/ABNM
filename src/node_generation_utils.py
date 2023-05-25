@@ -42,7 +42,7 @@ def generate_graph_from_personality_data(num_nodes):
     def similarity_function(A,B):
         # Use cosine similatrity
         cosine = np.dot(A,B)/(np.linalg.norm(A)*np.linalg.norm(B))
-        return cosine
+        return (cosine + 1) / 2
 
     return G, similarity_function
 

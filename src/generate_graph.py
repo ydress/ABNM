@@ -15,7 +15,7 @@ from constants import w_pref
 # TODO decide distribution of distances
 def generate_distance():
     mean = 0
-    sigma = 0.01
+    sigma = 0.1
     sample_size = 1
     samples = np.random.normal(mean, sigma, sample_size)
     return samples[0]
