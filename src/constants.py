@@ -1,2 +1,2 @@
-W_PREF = 0.5
+W_PREF = 1
 SIGMA = 0.1

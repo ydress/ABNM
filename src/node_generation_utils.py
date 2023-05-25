@@ -31,6 +31,20 @@ def generate_locations_in_europe(n):
     return normalized_coors
 
 
+# this is stub implementation which disregards homophily
+def generate_graph_from_random_data(num_nodes):
+    G = nx.Graph()
+    coors = generate_locations_in_europe(num_nodes + 10)
+    for idx, coor in enumerate(coors):
+        node_id = idx + 1
+        G.add_node(node_id, coor=np.array(coor), vector=np.array([1]))
+
+    def similarity_function(A,B):
+        return 1
+
+    return G, similarity_function
+
+
 # https://www.kaggle.com/datasets/arslanali4343/top-personality-dataset
 def generate_graph_from_personality_data(num_nodes):
     if num_nodes > 1835: exit(1)
@@ -39,7 +53,6 @@ def generate_graph_from_personality_data(num_nodes):
 
     G = nx.Graph()
 
-    # TODO maybe use other feature v gen
     cols = ['openness','agreeableness','emotional_stability','conscientiousness','extraversion']
     # also normalize these cols
     data = df[cols].values
@@ -56,7 +69,6 @@ def generate_graph_from_personality_data(num_nodes):
         node_id = index + 1
         G.add_node(node_id, coor=np.array(coor), vector=np.array(vec))
 
-    # TODO craft sim f
     def similarity_function(A,B):
         # Use cosine similatrity
         cosine = np.dot(A,B)/(np.linalg.norm(A)*np.linalg.norm(B))
