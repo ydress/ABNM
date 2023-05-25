@@ -1,1 +1,1 @@
-VECTOR_SIZE = 3
+w_pref = 0.5
