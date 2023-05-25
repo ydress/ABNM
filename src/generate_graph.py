@@ -9,6 +9,7 @@ import argparse
 
 from utils import info, visualize, deg_distribution_plot, closestPairs, k_closest_points
 from node_generation_utils import generate_graph_from_personality_data
+from constants import w_pref
 
 
 # TODO decide distribution of distances
@@ -95,15 +96,13 @@ def generate_graph(num_nodes, min_deg):
             if node == traveler_node: 
                 P_attach_list.append(0)
             else:
-                sim_const = 0
-                deg_const = 1
+                w_sim = 1 - w_pref
                 sim = similarity_function(G.nodes[traveler_node]['vector'], G.nodes[node]['vector'])
-                #TODO: preferencial
                 if not sum_degs:
                     P_deg = 1
                 else:
                     P_deg = G.degree[node] / sum_degs
-                P_attach = sim_const * sim + deg_const * P_deg
+                P_attach = w_sim * sim + w_pref * P_deg
                 P_attach_list.append(P_attach)
         weights = P_attach_list
         sampled_indices = random.choices(range(len(P_attach_list)), weights=weights, k=min_deg)
@@ -139,12 +138,19 @@ def parse_args():
         default=2,
         help="minimum degree of nodes",
     )
+    parser.add_argument(
+        "-g",
+        "--gridsearch",
+        action="store_true"
+    )
     args = parser.parse_args()
 
     return args
 
 if __name__ == "__main__":
     ARGS = parse_args()
+    if ARGS.gridsearch: 
+        exit() 
     #G = generate_graph(num_nodes=100, min_deg=2)
     G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
     info(G)
