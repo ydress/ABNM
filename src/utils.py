@@ -3,6 +3,9 @@ import networkx as nx
 from statistics import mean
 import random
 import matplotlib.pyplot as plt
+import math
+import sys
+from collections import defaultdict
 
 
 # from INA tutorial
@@ -36,6 +39,56 @@ def info(G, fast=False):
     print()
     return G
 
+def closestPair(coordinates, n):
+
+    # List of pairs to store points on plane
+    points = [(coordinates[i][0], coordinates[i][1]) for i in range(n)]
+
+    # Sort them according to their x-coordinates
+    points.sort()
+
+    # Minimum distance b/w points seen so far
+    d = sys.maxsize
+
+    # Keeping the points in increasing order
+    st = set()
+    st.add(points[0])
+    neighbors = defaultdict(list)
+
+    for i in range(1, n):
+        l = set([p for p in st if p[0] >= points[i][0]-d and p[1] >= points[i][1]-d])
+        r = set([p for p in st if p[0] <= points[i][0]+d and p[1] <= points[i][1]+d])
+        intersection = l & r
+        if len(intersection) == 0:
+            continue
+
+        for val in intersection:
+            dis = math.pow(points[i][0] - val[0], 2) + math.pow(points[i][1] - val[1], 2)
+
+            # Updating the minimum distance dis
+            if d > dis:
+                d = dis
+            # neighbors[val].append(points[i])
+            if len(neighbors[val]) < 10:
+                neighbors[val].append(points[i])
+                neighbors[points[i]].append(val)
+            else:
+                # Check if the current point is closer than the existing neighbors
+                max_distance = max([math.pow(val[0] - p[0], 2) + math.pow(val[1] - p[1], 2) for p in neighbors[val]])
+                if dis < max_distance:
+                    # Remove the neighbor with maximum distance
+                    max_index = [math.pow(val[0] - p[0], 2) + math.pow(val[1] - p[1], 2) for p in neighbors[val]].index(max_distance)
+
+                    max_neighbor = neighbors[val][max_index]
+
+                    del neighbors[val][max_index]
+                    del neighbors[max_neighbor][neighbors[max_neighbor].index(val)]
+                    # Add the current point as a neighbor
+                    neighbors[val].append(points[i])
+                    neighbors[points[i]].append(val)
+        st.add(points[i])
+
+    return neighbors
 
 def visualize(G):
     pos = nx.spring_layout(G) 
