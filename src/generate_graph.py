@@ -14,7 +14,7 @@ from node_generation_utils import generate_graph_from_personality_data
 # TODO decide distribution of distances
 def generate_distance():
     mean = 0
-    sigma = 0.1
+    sigma = 0.01
     sample_size = 1
     samples = np.random.normal(mean, sigma, sample_size)
     return samples[0]
@@ -122,6 +122,13 @@ def parse_args():
         default=2,
         help="minimum degree of nodes",
     )
+    parser.add_argument(
+        "-v",
+        "--visualize",
+        type=bool,
+        default=False,
+        help="Graph will be visualized if True",
+    )
     args = parser.parse_args()
 
     return args
@@ -131,5 +138,6 @@ if __name__ == "__main__":
     #G = generate_graph(num_nodes=100, min_deg=2)
     G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
     info(G)
-    visualize(G)
+    if ARGS.visualize:
+        visualize(G)
     deg_distribution_plot(G)
