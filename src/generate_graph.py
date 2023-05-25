@@ -7,7 +7,7 @@ import bisect
 import argparse
 
 
-from utils import info, visualize, deg_distribution_plot, closestPairs
+from utils import info, visualize, deg_distribution_plot, closestPairs, k_closest_points
 from node_generation_utils import generate_graph_from_personality_data
 
 
@@ -45,12 +45,21 @@ def precompute_y(G):
 
 def generate_graph(num_nodes, min_deg):
     G, similarity_function = generate_graph_from_personality_data(num_nodes=num_nodes)
-    def precompute_node_neighs_dict():
-        coors_list = []
-        for node in G.nodes(data=True):
-            coors_list.append(node[1]['coor'])
-        return closestPairs(coors_list, len(G))
-    node_neighs_dict = precompute_node_neighs_dict()
+    #def precompute_node_neighs_dict():
+    #    coors_list = []
+    #    for node in G.nodes(data=True):
+    #        (x,y) = (node[1]['coor'])
+    #        coors_list.append((x,y))
+    #    return closestPairs(coors_list, len(G))
+    #TODO node id should be key for dict
+    #node_neighs_dict = precompute_node_neighs_dict()
+
+    node_neighs_dict = dict()
+
+    for node in G.nodes(data=True):
+        neighs_list = k_closest_points(G=G, target=node[1]['coor'], k=5)
+        node_id = str(node[0])
+        node_neighs_dict[node_id] = neighs_list
 
     sum_degs = 0
 

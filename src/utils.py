@@ -5,10 +5,43 @@ import random
 import matplotlib.pyplot as plt
 import math
 import sys
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 
 import seaborn as sns
 
+import heapq
+from typing import List, Tuple
+
+#coordinates: List[Tuple[float, float]]
+def k_closest_points(G: nx.Graph, target: Tuple[float, float], k: int) -> List[Tuple[float, float]]:
+    max_heap = []
+    coors_list = []
+    node_obj = namedtuple("Node", "id, x, y")
+    for node in G.nodes(data=True):
+            x,y = node[1]['coor']
+            id = node[0]
+            cur_node = node_obj(id=id, x=x, y=y)
+            #coors_list.append((x,y))
+            coors_list.append(cur_node)
+    #for coordinate in coordinates:
+    for node in coors_list:
+        # Calculate Euclidean distance.
+        #distance = math.sqrt((coordinate[0] - target[0])**2 + (coordinate[1] - target[1])**2)
+        distance = math.sqrt((node.x - target[0])**2 + (node.y - target[1])**2)
+        
+        # If we have fewer than k items in the heap, we push the new item inside.
+        if len(max_heap) < k:
+            #heapq.heappush(max_heap, (-distance, coordinate))
+            heapq.heappush(max_heap, (-distance, node.id))
+        else:
+            # If the new item is closer than the item with the largest distance in the heap,
+            # we pop the heap and push the new item inside.
+            if distance < -max_heap[0][0]:
+                heapq.heappop(max_heap)
+                #heapq.heappush(max_heap, (-distance, coordinate))
+                heapq.heappush(max_heap, (-distance, node.id))
+
+    return [coordinate for distance, coordinate in max_heap]
 
 # from INA tutorial
 def info(G, fast=False):
