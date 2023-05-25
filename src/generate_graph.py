@@ -65,23 +65,26 @@ def generate_graph(num_nodes, min_deg):
         if len(percentual_dist_list_y) == lower_bound_index: lower_bound_index -= 1
         return percentual_dist_list_y[lower_bound_index][0]
         
-    # todo
+    # TODO
     def neighs(node):
         return nodes
 
     def sample_nodes_from_destination(traveler_node, destination_node, min_deg):
         neigbours = neighs(destination_node)
-        sims = []
+        P_attach_list = []
         for node in neigbours:
             if node == traveler_node: 
-                sims.append(0)
+                P_attach_list.append(0)
             else:
                 sim_const = 1
-                sim = sim_const * similarity_function(G.nodes[traveler_node]['vector'], G.nodes[node]['vector'])
-                # todo preferencial
-                sims.append(sim)
-        weights = sims
-        sampled_indices = random.choices(range(len(sims)), weights=weights, k=min_deg)
+                deg_const = 1
+                sim = similarity_function(G.nodes[traveler_node]['vector'], G.nodes[node]['vector'])
+                #TODO: preferencial
+                P_deg = G.degree[node] / sum_degs
+                P_attach = sim_const * sim + deg_const * P_deg
+                P_attach_list.append(P_attach)
+        weights = P_attach_list
+        sampled_indices = random.choices(range(len(P_attach_list)), weights=weights, k=min_deg)
         sampled_nodes = []
         for idx in sampled_indices: 
             sampled_nodes.append(neigbours[idx])
@@ -92,6 +95,7 @@ def generate_graph(num_nodes, min_deg):
         sampled_nodes = sample_nodes_from_destination(node, destination_node, min_deg)
         for sampled_node in sampled_nodes:
             G.add_edge(node, sampled_node)
+            sum_degs += 2
     return G
 
 
@@ -100,6 +104,3 @@ G = generate_graph(num_nodes=100, min_deg=2)
 info(G)
 visualize(G)
 deg_distribution_plot(G)
-
-
-
