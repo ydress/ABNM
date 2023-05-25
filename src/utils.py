@@ -7,6 +7,8 @@ import math
 import sys
 from collections import defaultdict
 
+import seaborn as sns
+
 
 # from INA tutorial
 def info(G, fast=False):
@@ -92,12 +94,23 @@ def closestPair(coordinates, n):
 
 def visualize(G):
     pos = nx.spring_layout(G) 
-    nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', edge_color='gray')
+    nx.draw_networkx(G, pos=pos, with_labels=True, node_color='lightblue', edge_color='gray')
     plt.show()
 
 
 def deg_distribution_plot(G):
-    plt.xlabel("Degree")                                                            
-    plt.ylabel("Frequency")                                                         
-    plt.loglog(nx.degree_histogram(G), marker=".", linestyle="None")
+    # Compute the degree distribution p_k
+    degrees = [k for n, k in G.degree()]
+    degree_distribution = [[k, degrees.count(k)/G.number_of_nodes()] for k in degrees]
+    data = np.array(degree_distribution).T
+    # Plot p_k on a log-log plot (Scatterplot)
+    # x = k, y = p_k
+    sns.scatterplot(x = data[0], y=data[1])
+    plt.xscale('log')
+    plt.yscale('log')
+
+    plt.xlabel("Degree (k)")
+    plt.ylabel("Degree Distripution (p_k)")
+                                                        
+    #plt.loglog(x = data[0], y=data[1], marker=".", linestyle="None")
     plt.show()   
