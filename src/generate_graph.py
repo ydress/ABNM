@@ -58,7 +58,7 @@ def generate_graph(num_nodes, min_deg):
 
     for node in G.nodes(data=True):
         neighs_list = k_closest_points(G=G, target=node[1]['coor'], k=5)
-        node_id = str(node[0])
+        node_id = node[0]
         node_neighs_dict[node_id] = neighs_list
 
     sum_degs = 0
