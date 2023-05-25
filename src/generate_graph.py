@@ -4,6 +4,7 @@ import itertools
 import random
 import copy
 import bisect
+import argparse
 
 
 from utils import info, visualize, deg_distribution_plot
@@ -105,8 +106,30 @@ def generate_graph(num_nodes, min_deg):
     return G
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Graph Generator Script")
+    parser.add_argument(
+        "-n",
+        "--numnodes",
+        type=int,
+        default=100,
+        help="Number of Nodes in Graph",
+    )
+    parser.add_argument(
+        "-d",
+        "--mindeg",
+        type=int,
+        default=2,
+        help="minimum degree of nodes",
+    )
+    args = parser.parse_args()
 
-G = generate_graph(num_nodes=100, min_deg=2)
-info(G)
-visualize(G)
-deg_distribution_plot(G)
+    return args
+
+if __name__ == "__main__":
+    ARGS = parse_args()
+    #G = generate_graph(num_nodes=100, min_deg=2)
+    G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
+    info(G)
+    visualize(G)
+    deg_distribution_plot(G)
