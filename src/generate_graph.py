@@ -4,12 +4,14 @@ import itertools
 import random
 import copy
 import bisect
+import argparse
 
 
 from utils import info, visualize, deg_distribution_plot
 from node_generation_utils import generate_graph_from_personality_data
 
 
+# TODO decide distribution of distances
 def generate_distance():
     mean = 0
     sigma = 0.1
@@ -65,7 +67,7 @@ def generate_graph(num_nodes, min_deg):
         if len(percentual_dist_list_y) == lower_bound_index: lower_bound_index -= 1
         return percentual_dist_list_y[lower_bound_index][0]
         
-    # TODO
+    # TODO precompute neighs (what should be the size? maybe square of min_deg?)
     def neighs(node):
         return nodes
 
@@ -93,7 +95,9 @@ def generate_graph(num_nodes, min_deg):
             sampled_nodes.append(neigbours[idx])
         return sampled_nodes
 
+    # MAIN
     for node in shuffled_nodes:
+        # TODO flip a coin and either travel y or x
         destination_node = travel_y(node) 
         sampled_nodes = sample_nodes_from_destination(node, destination_node, min_deg)
         for sampled_node in sampled_nodes:
@@ -102,8 +106,30 @@ def generate_graph(num_nodes, min_deg):
     return G
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Graph Generator Script")
+    parser.add_argument(
+        "-n",
+        "--numnodes",
+        type=int,
+        default=100,
+        help="Number of Nodes in Graph",
+    )
+    parser.add_argument(
+        "-d",
+        "--mindeg",
+        type=int,
+        default=2,
+        help="minimum degree of nodes",
+    )
+    args = parser.parse_args()
 
-G = generate_graph(num_nodes=100, min_deg=2)
-info(G)
-visualize(G)
-deg_distribution_plot(G)
+    return args
+
+if __name__ == "__main__":
+    ARGS = parse_args()
+    #G = generate_graph(num_nodes=100, min_deg=2)
+    G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
+    info(G)
+    visualize(G)
+    deg_distribution_plot(G)

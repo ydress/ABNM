@@ -98,6 +98,7 @@ def visualize(G):
     plt.show()
 
 
+# TODO maybe buggy
 def deg_distribution_plot(G):
     # Compute the degree distribution p_k
     degrees = [k for n, k in G.degree()]

@@ -6,7 +6,7 @@ import numpy as np
 import pycristoforo as pyc
 
 
-
+# TODO maybe normalize this -> simplify code in other parts
 def generate_locations_in_europe(n):
     country_name = "Italy"
     country = pyc.get_shape(country_name)
@@ -21,6 +21,7 @@ def generate_graph_from_personality_data(num_nodes):
 
     G = nx.Graph()
 
+    # TODO maybe use other feature v gen
     cols = ['openness','agreeableness','emotional_stability','conscientiousness','extraversion']
     # also normalize these cols
     data = df[cols].values
@@ -37,6 +38,7 @@ def generate_graph_from_personality_data(num_nodes):
         node_id = index + 1
         G.add_node(node_id, coor=np.array(coor), vector=np.array(vec))
 
+    # TODO craft sim f
     def similarity_function(u_vec,v_vec):
         feat_const = 1
         feat_sim = np.linalg.norm(u_vec - v_vec)
