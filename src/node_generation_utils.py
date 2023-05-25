@@ -39,10 +39,10 @@ def generate_graph_from_personality_data(num_nodes):
         G.add_node(node_id, coor=np.array(coor), vector=np.array(vec))
 
     # TODO craft sim f
-    def similarity_function(u_vec,v_vec):
-        feat_const = 1
-        feat_sim = np.linalg.norm(u_vec - v_vec)
-        return feat_const * feat_sim
+    def similarity_function(A,B):
+        # Use cosine similatrity
+        cosine = np.dot(A,B)/(np.linalg.norm(A)*np.linalg.norm(B))
+        return cosine
 
     return G, similarity_function
 
