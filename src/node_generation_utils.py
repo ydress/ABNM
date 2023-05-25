@@ -33,6 +33,7 @@ def generate_locations_in_europe(n):
 
 # https://www.kaggle.com/datasets/arslanali4343/top-personality-dataset
 def generate_graph_from_personality_data(num_nodes):
+    if num_nodes > 1835: exit(1)
     csv_file = './datasets/personality_data.csv'
     df = pd.read_csv(csv_file)
 

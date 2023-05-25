@@ -9,13 +9,13 @@ import argparse
 
 from utils import info, visualize, deg_distribution_plot, closestPairs, k_closest_points
 from node_generation_utils import generate_graph_from_personality_data
-from constants import w_pref
+from constants import W_PREF, SIGMA
 
 
 # TODO decide distribution of distances
 def generate_distance():
     mean = 0
-    sigma = 0.1
+    sigma = SIGMA
     sample_size = 1
     samples = np.random.normal(mean, sigma, sample_size)
     return samples[0]
@@ -83,13 +83,13 @@ def generate_graph(num_nodes, min_deg):
             if node == traveler_node: 
                 P_attach_list.append(0)
             else:
-                w_sim = 1 - w_pref
+                w_sim = 1 - W_PREF
                 sim = similarity_function(G.nodes[traveler_node]['vector'], G.nodes[node]['vector'])
                 if not sum_degs:
                     P_deg = 1
                 else:
                     P_deg = G.degree[node] / sum_degs
-                P_attach = w_sim * sim + w_pref * P_deg
+                P_attach = w_sim * sim + W_PREF * P_deg
                 P_attach_list.append(P_attach)
         weights = P_attach_list
         sampled_indices = random.choices(range(len(P_attach_list)), weights=weights, k=min_deg)
@@ -137,9 +137,25 @@ def parse_args():
 if __name__ == "__main__":
     ARGS = parse_args()
     if ARGS.gridsearch: 
-        exit() 
-    #G = generate_graph(num_nodes=100, min_deg=2)
-    G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
-    info(G)
-    visualize(G)
-    deg_distribution_plot(G)
+        for param_nodes in [1000]:
+            for param_w_pref in [0.5]:
+                for param_sigma in [0.1]:
+                    for param_min_deg in [3]:
+                        print(
+                        f"""
+                        N: {param_nodes}, MIN_DEG: {param_min_deg},
+                        W_PREF: {param_w_pref},
+                        SIGMA: {param_sigma}
+                        """)
+                        W_PREF = param_w_pref
+                        SIGMA = param_sigma
+                        G = generate_graph(num_nodes=param_nodes, min_deg=param_min_deg)
+                        info(G)
+                        # visualize(G)
+                        # deg_distribution_plot(G)
+    else:
+        #G = generate_graph(num_nodes=100, min_deg=2)
+        G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
+        info(G)
+        visualize(G)
+        deg_distribution_plot(G)
