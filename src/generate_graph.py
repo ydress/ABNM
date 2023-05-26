@@ -5,10 +5,11 @@ import random
 import copy
 import bisect
 import argparse
+import matplotlib.pyplot as plt
 
 
-from utils import info, visualize, deg_distribution_plot, closestPairs, k_closest_points
-from node_generation_utils import generate_graph_from_personality_data, generate_graph_from_random_data
+from utils import info, visualize, deg_distribution_plot, closestPairs, k_closest_points, generate_nearest_neighbors_graph
+from node_generation_utils import generate_graph_from_personality_data, generate_graph_from_random_data, generate_graph_from_paper
 from constants import W_PREF, SIGMA
 
 
@@ -33,17 +34,23 @@ def precompute_axis(G, axis):
 
 
 def generate_graph(num_nodes, min_deg):
-    # G, similarity_function = generate_graph_from_personality_data(num_nodes=num_nodes)
-    G, similarity_function = generate_graph_from_random_data(num_nodes=num_nodes)
-    
+    #G, similarity_function = generate_graph_from_personality_data(num_nodes=num_nodes)
+    #G, similarity_function = generate_graph_from_random_data(num_nodes=num_nodes)
+    G, similarity_function = generate_graph_from_paper(num_nodes=num_nodes)
 
-    node_neighs_dict = dict()
-    nearest = min_deg**2
+    
+    #node_neighs_dict = dict()
+    #nearest = min_deg*2
+    some_constant = 10
+    nearest = some_constant * np.round(np.log(len(G.nodes))).astype(int)
+    """
     for node in G.nodes(data=True):
         neighs_list = k_closest_points(G=G, target=node[1]['coor'], k=nearest)
         node_id = node[0]
         node_neighs_dict[node_id] = neighs_list
-
+    """
+    node_neighs_dict = generate_nearest_neighbors_graph(G, k=nearest)
+    
     sum_degs = 0
 
     nodes = list(G.nodes())
@@ -136,9 +143,9 @@ def parse_args():
 
 param_grid = {
     "nodes": [1000, 2000, 5000, 10000],
-    "w_pref": [0],
+    "w_pref": [0.95],
     "sigma": [0.1],
-    "min_deg": [10],
+    "min_deg": [25],
 }
 
 if __name__ == "__main__":
@@ -159,10 +166,13 @@ if __name__ == "__main__":
                         G = generate_graph(num_nodes=param_nodes, min_deg=param_min_deg)
                         info(G)
                         #visualize(G)
-                        deg_distribution_plot(G)
+                        deg = deg_distribution_plot(G)
+                        save_path = "./degree_distr_paper_" + str(param_nodes) + ".png"
+                        deg.savefig(save_path)
+                        deg.close()
     else:
         #G = generate_graph(num_nodes=100, min_deg=2)
         G = generate_graph(num_nodes=ARGS.numnodes, min_deg=ARGS.mindeg)
         info(G)
-        # visualize(G)
+        #visualize(G)
         deg_distribution_plot(G)

@@ -6,11 +6,30 @@ import matplotlib.pyplot as plt
 import math
 import sys
 from collections import defaultdict, namedtuple
-
+from sklearn.neighbors import BallTree
 import seaborn as sns
 
 import heapq
 from typing import List, Tuple
+
+def generate_nearest_neighbors_graph(G: nx.Graph, k: int):
+    # Create a list of node coordinates and ids
+    node_coords = []
+    node_ids = []
+    for node in G.nodes(data=True):
+        node_coords.append(node[1]['coor'])
+        node_ids.append(node[0])
+
+    # Build a BallTree
+    tree = BallTree(np.array(node_coords))
+
+    # Query the tree for the k nearest neighbors for each node
+    dist, ind = tree.query(node_coords, k+1)  # k+1 because a node is its own nearest neighbor
+
+    # Create a dictionary {node_id: [neighbor_ids]}
+    neighbors_dict = {node_ids[i]: [node_ids[j] for j in ind[i] if j != i] for i in range(len(node_ids))}
+
+    return neighbors_dict
 
 #coordinates: List[Tuple[float, float]]
 def k_closest_points(G: nx.Graph, target: Tuple[float, float], k: int) -> List[Tuple[float, float]]:
@@ -21,24 +40,20 @@ def k_closest_points(G: nx.Graph, target: Tuple[float, float], k: int) -> List[T
             x,y = node[1]['coor']
             id = node[0]
             cur_node = node_obj(id=id, x=x, y=y)
-            #coors_list.append((x,y))
             coors_list.append(cur_node)
     #for coordinate in coordinates:
     for node in coors_list:
         # Calculate Euclidean distance.
-        #distance = math.sqrt((coordinate[0] - target[0])**2 + (coordinate[1] - target[1])**2)
         distance = math.sqrt((node.x - target[0])**2 + (node.y - target[1])**2)
         
         # If we have fewer than k items in the heap, we push the new item inside.
         if len(max_heap) < k:
-            #heapq.heappush(max_heap, (-distance, coordinate))
             heapq.heappush(max_heap, (-distance, node.id))
         else:
             # If the new item is closer than the item with the largest distance in the heap,
             # we pop the heap and push the new item inside.
             if distance < -max_heap[0][0]:
                 heapq.heappop(max_heap)
-                #heapq.heappush(max_heap, (-distance, coordinate))
                 heapq.heappush(max_heap, (-distance, node.id))
 
     return [coordinate for distance, coordinate in max_heap]
@@ -146,4 +161,5 @@ def deg_distribution_plot(G):
     plt.ylabel("Degree Distripution (p_k)")
                                                         
     #plt.loglog(x = data[0], y=data[1], marker=".", linestyle="None")
-    plt.show()   
+    #plt.show()
+    return plt

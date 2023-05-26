@@ -1,2 +1,2 @@
-W_PREF = 1
-SIGMA = 0.1
+W_PREF = 0.95
+SIGMA = 0.05
