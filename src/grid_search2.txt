@@ -1,0 +1,56 @@
+
+                        N: 1000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,010 (0)
+       Edges | 9,527 (0)
+     Density | 0.0186970729 
+      Degree | 18.87 (34)
+    Avg_dist | 2.87 
+         LCC | 100.0% (1)
+  Clustering | 0.0475
+
+
+                        N: 2000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 2,010 (0)
+       Edges | 19,104 (0)
+     Density | 0.0094618991 
+      Degree | 19.01 (41)
+    Avg_dist | 3.10 
+         LCC | 100.0% (1)
+  Clustering | 0.0304
+
+
+                        N: 5000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 5,010 (0)
+       Edges | 47,848 (0)
+     Density | 0.0038133356 
+      Degree | 19.10 (43)
+    Avg_dist | 3.47 
+         LCC | 100.0% (1)
+  Clustering | 0.0138
+
+
+                        N: 10000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 10,010 (0)
+       Edges | 95,665 (0)
+     Density | 0.0019096699 
+      Degree | 19.11 (64)
+    Avg_dist | 3.69 
+         LCC | 100.0% (1)
+  Clustering | 0.0078
+

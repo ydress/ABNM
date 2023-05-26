@@ -1,0 +1,392 @@
+
+                        N: 100, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 110 (0)
+       Edges | 186 (0)
+     Density | 0.0310258549 
+      Degree | 3.38 (10)
+    Avg_dist | 4.63 
+         LCC | 100.0% (1)
+  Clustering | 0.0986
+
+
+                        N: 100, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 110 (0)
+       Edges | 497 (0)
+     Density | 0.0829024187 
+      Degree | 9.04 (18)
+    Avg_dist | 2.51 
+         LCC | 100.0% (1)
+  Clustering | 0.1548
+
+
+                        N: 100, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 110 (0)
+       Edges | 998 (0)
+     Density | 0.1664720601 
+      Degree | 18.15 (26)
+    Avg_dist | 1.85 
+         LCC | 100.0% (1)
+  Clustering | 0.1562
+
+
+                        N: 100, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 110 (0)
+       Edges | 2,219 (0)
+     Density | 0.3701417848 
+      Degree | 40.35 (50)
+    Avg_dist | 1.61 
+         LCC | 100.0% (1)
+  Clustering | 0.3645
+
+
+                        N: 250, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 260 (0)
+       Edges | 448 (0)
+     Density | 0.0133056133 
+      Degree | 3.45 (10)
+    Avg_dist | 5.46 
+         LCC | 100.0% (1)
+  Clustering | 0.0542
+
+
+                        N: 250, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 260 (0)
+       Edges | 1,177 (0)
+     Density | 0.0349569350 
+      Degree | 9.05 (19)
+    Avg_dist | 3.09 
+         LCC | 100.0% (1)
+  Clustering | 0.0836
+
+
+                        N: 250, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 260 (0)
+       Edges | 2,431 (0)
+     Density | 0.0722007722 
+      Degree | 18.70 (32)
+    Avg_dist | 2.21 
+         LCC | 100.0% (1)
+  Clustering | 0.1048
+
+
+                        N: 250, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 260 (0)
+       Edges | 5,960 (0)
+     Density | 0.1770121770 
+      Degree | 45.85 (61)
+    Avg_dist | 1.82 
+         LCC | 100.0% (1)
+  Clustering | 0.1758
+
+
+                        N: 500, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 510 (0)
+       Edges | 898 (0)
+     Density | 0.0069186024 
+      Degree | 3.52 (12)
+    Avg_dist | 5.73 
+         LCC | 100.0% (1)
+  Clustering | 0.0485
+
+
+                        N: 500, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 510 (0)
+       Edges | 2,338 (0)
+     Density | 0.0180130205 
+      Degree | 9.17 (18)
+    Avg_dist | 3.35 
+         LCC | 100.0% (1)
+  Clustering | 0.0573
+
+
+                        N: 500, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 510 (0)
+       Edges | 4,814 (0)
+     Density | 0.0370892561 
+      Degree | 18.88 (42)
+    Avg_dist | 2.58 
+         LCC | 100.0% (1)
+  Clustering | 0.0739
+
+
+                        N: 500, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 510 (0)
+       Edges | 12,163 (0)
+     Density | 0.0937093108 
+      Degree | 47.70 (66)
+    Avg_dist | 1.91 
+         LCC | 100.0% (1)
+  Clustering | 0.0912
+
+
+                        N: 1000, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,010 (0)
+       Edges | 1,780 (0)
+     Density | 0.0034933127 
+      Degree | 3.52 (20)
+    Avg_dist | 6.31 
+         LCC | 100.0% (1)
+  Clustering | 0.0253
+
+
+                        N: 1000, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,010 (0)
+       Edges | 4,658 (0)
+     Density | 0.0091414890 
+      Degree | 9.22 (21)
+    Avg_dist | 3.71 
+         LCC | 100.0% (1)
+  Clustering | 0.0324
+
+
+                        N: 1000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,010 (0)
+       Edges | 9,562 (0)
+     Density | 0.0187657616 
+      Degree | 18.93 (31)
+    Avg_dist | 2.84 
+         LCC | 100.0% (1)
+  Clustering | 0.0491
+
+
+                        N: 1000, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,010 (0)
+       Edges | 24,425 (0)
+     Density | 0.0479349223 
+      Degree | 48.37 (79)
+    Avg_dist | 2.07 
+         LCC | 100.0% (1)
+  Clustering | 0.0569
+
+
+                        N: 1500, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,510 (0)
+       Edges | 2,641 (0)
+     Density | 0.0023181002 
+      Degree | 3.50 (20)
+    Avg_dist | 6.59 
+         LCC | 100.0% (1)
+  Clustering | 0.0120
+
+
+                        N: 1500, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,510 (0)
+       Edges | 6,932 (0)
+     Density | 0.0060844645 
+      Degree | 9.18 (21)
+    Avg_dist | 3.92 
+         LCC | 100.0% (1)
+  Clustering | 0.0245
+
+
+                        N: 1500, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,510 (0)
+       Edges | 14,405 (0)
+     Density | 0.0126437841 
+      Degree | 19.08 (33)
+    Avg_dist | 3.05 
+         LCC | 100.0% (1)
+  Clustering | 0.0404
+
+
+                        N: 1500, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 1,510 (0)
+       Edges | 36,652 (0)
+     Density | 0.0321707723 
+      Degree | 48.55 (83)
+    Avg_dist | 2.25 
+         LCC | 100.0% (1)
+  Clustering | 0.0469
+
+
+                        N: 3000, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 3,010 (0)
+       Edges | 5,239 (0)
+     Density | 0.0011568837 
+      Degree | 3.48 (37)
+    Avg_dist | 7.11 
+         LCC | 100.0% (1)
+  Clustering | 0.0127
+
+
+                        N: 3000, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 3,010 (0)
+       Edges | 13,848 (0)
+     Density | 0.0030579358 
+      Degree | 9.20 (31)
+    Avg_dist | 4.14 
+         LCC | 100.0% (1)
+  Clustering | 0.0125
+
+
+                        N: 3000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 3,010 (0)
+       Edges | 28,702 (0)
+     Density | 0.0063380181 
+      Degree | 19.07 (36)
+    Avg_dist | 3.27 
+         LCC | 100.0% (1)
+  Clustering | 0.0215
+
+
+                        N: 3000, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 3,010 (0)
+       Edges | 73,278 (0)
+     Density | 0.0161813563 
+      Degree | 48.69 (81)
+    Avg_dist | 2.52 
+         LCC | 100.0% (1)
+  Clustering | 0.0338
+
+
+                        N: 5000, MIN_DEG: 2,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 5,010 (0)
+       Edges | 8,740 (0)
+     Density | 0.0006965506 
+      Degree | 3.49 (59)
+    Avg_dist | 7.45 
+         LCC | 100.0% (1)
+  Clustering | 0.0068
+
+
+                        N: 5000, MIN_DEG: 5,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 5,010 (0)
+       Edges | 23,097 (0)
+     Density | 0.0018407585 
+      Degree | 9.22 (39)
+    Avg_dist | 4.39 
+         LCC | 100.0% (1)
+  Clustering | 0.0062
+
+
+                        N: 5000, MIN_DEG: 10,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 5,010 (0)
+       Edges | 47,737 (0)
+     Density | 0.0038044892 
+      Degree | 19.06 (42)
+    Avg_dist | 3.46 
+         LCC | 100.0% (1)
+  Clustering | 0.0149
+
+
+                        N: 5000, MIN_DEG: 25,
+                        W_PREF: 0,
+                        SIGMA: 0.1
+                        
+       Graph | ''
+       Nodes | 5,010 (0)
+       Edges | 122,245 (0)
+     Density | 0.0097425433 
+      Degree | 48.80 (81)
+    Avg_dist | 2.72 
+         LCC | 100.0% (1)
+  Clustering | 0.0239
+

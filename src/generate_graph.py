@@ -134,13 +134,20 @@ def parse_args():
 
     return args
 
+param_grid = {
+    "nodes": [1000, 2000, 5000, 10000],
+    "w_pref": [0],
+    "sigma": [0.1],
+    "min_deg": [10],
+}
+
 if __name__ == "__main__":
     ARGS = parse_args()
     if ARGS.gridsearch: 
-        for param_nodes in [1500]:
-            for param_w_pref in [1]:
-                for param_sigma in [0.1]:
-                    for param_min_deg in [25]:
+        for param_nodes in param_grid["nodes"]:
+            for param_w_pref in param_grid["w_pref"]:
+                for param_sigma in param_grid["sigma"]:
+                    for param_min_deg in param_grid["min_deg"]:
                         print(
                         f"""
                         N: {param_nodes}, MIN_DEG: {param_min_deg},
@@ -151,7 +158,7 @@ if __name__ == "__main__":
                         SIGMA = param_sigma
                         G = generate_graph(num_nodes=param_nodes, min_deg=param_min_deg)
                         info(G)
-                        visualize(G)
+                        #visualize(G)
                         deg_distribution_plot(G)
     else:
         #G = generate_graph(num_nodes=100, min_deg=2)
